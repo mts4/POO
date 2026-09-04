@@ -68,6 +68,7 @@ public class Ruleta {
         int monto = in.nextInt();
         int numero = girarRuleta();
         boolean resultadoEvaluado = evaluarResultado(numero, tipo);
+        mostrarResultado(numero, tipo, monto, resultadoEvaluado);
     }
     public static char leerTipoApuesta (Scanner in) {
        System.out.print("escriba la primera letra en mayuscula de la opcion para seleccionarla \n" +
@@ -78,7 +79,6 @@ public class Ruleta {
 
     public static int girarRuleta() {
      int numeroGanador= rng.nextInt(CANTIDAD_NUMEROS);
-        System.out.print(numeroGanador);
         return numeroGanador;
     }
 
@@ -91,8 +91,25 @@ public class Ruleta {
      * @return true si acertó, false si perdió.
      */
     public static boolean evaluarResultado (int numero, char tipo) {
+        if (numero == 0) {
+            return false;
+        }
+        switch (tipo) {
+            case 'R':
+                return esRojo(numero);
 
-        return false;
+            case 'N':
+                return !esRojo(numero);
+
+            case 'P':
+                return (numero % 2 == 0);
+
+            case 'I':
+                return (numero % 2 != 0);
+
+            default:
+                return false;
+        }
     }
 
 
@@ -126,7 +143,13 @@ public class Ruleta {
      * @param acierto si el jugador ganó o perdió.
      */
     public static void mostrarResultado (int numero, char tipo, int monto, boolean acierto) {
-        // TODO: Mostrar los datos y el resultado de la ronda.
+        System.out.println("Número que salió : " + numero);
+        if (acierto) {
+            monto = monto
+            System.out.println("Resultado: Has ganado $" + monto);
+        } else {
+            System.out.println("Resultado: Has perdido $" + monto);
+        }
     }
 
     /**
