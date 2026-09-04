@@ -61,32 +61,24 @@ public class Ruleta {
             }
         }
 
-    /**
-     * Inicia una ronda de la ruleta: leer apuesta, girar,
-     * evaluar y mostrar resultado.
-     *
-     * @param in Scanner para entrada por consola.
-     */
     public static void iniciarRonda (Scanner in) {
-        // TODO: Implementar el flujo completo de una ronda.
+        char tipo = leerTipoApuesta(in);
+        System.out.print("Cuanto desea apostar: ");
+        int monto = in.nextInt();
+        int numero = girarRuleta();
+        boolean resultadoEvaluado = evaluarResultado(numero, tipo);
     }
-
-    /**
-     * Permite al usuario seleccionar el tipo de apuesta
-     * (R/N/P/I).
-     *
-     * @param in Scanner para entrada por consola.
-     * @return el tipo de apuesta elegido.
-     */
     public static char leerTipoApuesta (Scanner in) {
-        // TODO: Leer y validar el tipo de apuesta.
-        return ' ';
+       System.out.print("escriba la primera letra en mayuscula de la opcion para seleccionarla \n" +
+               "**SELECCIONE TIPO DE APUESTA:** \n P - PAR \n I - IMPAR \n R- ROJO \n N - Negro");
+        char tipoApuesta = in.next().charAt(0);
+        return tipoApuesta;
     }
 
     /**
      * Simula el giro de la ruleta generando un número
      * aleatorio de 0 a 36.
-     *
+     T
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
