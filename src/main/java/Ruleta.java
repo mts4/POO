@@ -28,36 +28,38 @@ public class Ruleta {
 
             opcionElegida = leerOpcion(teclado);
 
+            ejecutarOpcion(opcionElegida, teclado);
+
         }
-        while (opcionElegida != 4);
+        while (opcionElegida != 3);
     }
 
     public static void mostrarMenu() {
         System.out.println("**MENU** \n SELECCIONE UNA OPCION INGRESANDO EL NUMERO ASOCIADO \n " +
-                "1. APUESTA PAR/IMPAR \n 2. APUESTA ROJO/NEGRO \n 3. VER ESTADISTICAS \n 4. SALIR ");
+                "1. INICIAR RONDA\n 2. VER ESTADISTICAS \n 3. SALIR ");
     }
 
-    /**
-     * Lee la opción elegida por el usuario desde teclado.
-     *
-     * @param in Scanner para entrada por consola.
-     * @return número de opción ingresado.
-     */
     public static int leerOpcion (Scanner in) {
-
-
-        return 4;
+        int opcion = in.nextInt();
+        return opcion;
     }
 
-    /**
-     * Ejecuta la acción correspondiente a la opción del menú.
-     *
-     * @param opcion opción elegida por el usuario.
-     * @param in Scanner para entrada por consola.
-     */
     public static void ejecutarOpcion(int opcion, Scanner in) {
-        // TODO: Ejecutar la acción asociada a la opción.
-    }
+        switch (opcion) {
+                case 1:
+                    iniciarRonda(in);
+                    break;
+                case 2:
+                    mostrarEstadisticas();
+                    break;
+                case 3:
+                    System.out.println("Saliendo del programa");
+                    break;
+                default:
+                    System.out.println("Opción no válida. Por favor, seleccione 1, 2 o 3.");
+                    break;
+            }
+        }
 
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar,
