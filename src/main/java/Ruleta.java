@@ -2,6 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Ruleta {
+    public static final int CANTIDAD_NUMEROS = 37;
     public static final int MAX_HISTORIAL = 100;
     public static int[] historialNumeros = new int[MAX_HISTORIAL];
     public static int[] historialApuestas = new int[MAX_HISTORIAL];
@@ -75,15 +76,10 @@ public class Ruleta {
         return tipoApuesta;
     }
 
-    /**
-     * Simula el giro de la ruleta generando un número
-     * aleatorio de 0 a 36.
-     T
-     * @return número de la ruleta.
-     */
     public static int girarRuleta() {
-        // TODO: Generar y retornar un número entre 0 y 36.
-        return 0;
+     int numeroGanador= rng.nextInt(CANTIDAD_NUMEROS);
+        System.out.print(numeroGanador);
+        return numeroGanador;
     }
 
     /**
@@ -95,18 +91,17 @@ public class Ruleta {
      * @return true si acertó, false si perdió.
      */
     public static boolean evaluarResultado (int numero, char tipo) {
-        // TODO: Evaluar el resultado según el tipo de apuesta.
+
         return false;
     }
 
-    /**
-     * Determina si un número corresponde a color rojo.
-     *
-     * @param n número de la ruleta.
-     * @return true si es rojo, false en caso contrario.
-     */
+
     public static boolean esRojo(int n) {
-        // TODO: Buscar el número en el arreglo numerosRojos.
+        for (int i = 0; i < numerosRojos.length; i++) {
+            if (numerosRojos[i] == n) {
+                return true;
+            }
+        }
         return false;
     }
 
