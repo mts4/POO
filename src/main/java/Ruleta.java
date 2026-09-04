@@ -71,12 +71,20 @@ public class Ruleta {
         mostrarResultado(numero, tipo, monto, resultadoEvaluado);
     }
     public static char leerTipoApuesta (Scanner in) {
-       System.out.print("escriba la primera letra en mayuscula de la opcion para seleccionarla \n" +
-               "**SELECCIONE TIPO DE APUESTA:** \n P - PAR \n I - IMPAR \n R- ROJO \n N - Negro");
-        char tipoApuesta = in.next().charAt(0);
-        return tipoApuesta;
+        boolean controlCiclo = true;
+        char tipoApuesta;
+        do {
+            System.out.print("escriba la primera letra en mayuscula de la opcion para seleccionarla \n" +
+                    "**SELECCIONE TIPO DE APUESTA:** \n P - PAR \n I - IMPAR \n R- ROJO \n N - Negro");
+            tipoApuesta = in.next().charAt(0);
+            if (tipoApuesta == 'R' || tipoApuesta == 'N' || tipoApuesta == 'P' || tipoApuesta == 'I') {
+                controlCiclo = false;
+            } else {
+                System.out.println("Opción no válida. Ingrese R, N, P o I.");
+            }
+           } while(controlCiclo);
+           return tipoApuesta;
     }
-
     public static int girarRuleta() {
      int numeroGanador= rng.nextInt(CANTIDAD_NUMEROS);
         return numeroGanador;
@@ -145,7 +153,7 @@ public class Ruleta {
     public static void mostrarResultado (int numero, char tipo, int monto, boolean acierto) {
         System.out.println("Número que salió : " + numero);
         if (acierto) {
-            monto = monto
+            monto = monto;
             System.out.println("Resultado: Has ganado $" + monto);
         } else {
             System.out.println("Resultado: Has perdido $" + monto);
