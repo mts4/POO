@@ -2,7 +2,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Ruleta {
-
     public static final int MAX_HISTORIAL = 100;
     public static int[] historialNumeros = new int[MAX_HISTORIAL];
     public static int[] historialApuestas = new int[MAX_HISTORIAL];
@@ -15,26 +14,27 @@ public class Ruleta {
             25, 27, 30, 32, 34, 36
     };
 
-    /**
-     * Método principal: inicia el programa llamando al menú.
-     */
+
     public static void main(String[] args) {
         menu();
     }
 
-    /**
-     * Controla el flujo principal del programa mostrando
-     * un menú en consola.
-     */
     public static void menu() {
-        // TODO: Repetir el menú hasta que el usuario elija salir.
+
+        Scanner teclado = new Scanner(System.in);
+        int opcionElegida;
+        do {
+            mostrarMenu();
+
+            opcionElegida = leerOpcion(teclado);
+
+        }
+        while (opcionElegida != 4);
     }
 
-    /**
-     * Muestra en consola las opciones disponibles del menú.
-     */
     public static void mostrarMenu() {
-        // TODO: Mostrar las opciones disponibles para el usuario.
+        System.out.println("**MENU** \n SELECCIONE UNA OPCION INGRESANDO EL NUMERO ASOCIADO \n " +
+                "1. APUESTA PAR/IMPAR \n 2. APUESTA ROJO/NEGRO \n 3. VER ESTADISTICAS \n 4. SALIR ");
     }
 
     /**
@@ -44,8 +44,9 @@ public class Ruleta {
      * @return número de opción ingresado.
      */
     public static int leerOpcion (Scanner in) {
-        // TODO: Leer y retornar la opción ingresada.
-        return 0;
+
+
+        return 4;
     }
 
     /**
