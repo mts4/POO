@@ -68,6 +68,7 @@ public class Ruleta {
         int monto = in.nextInt();
         int numero = girarRuleta();
         boolean resultadoEvaluado = evaluarResultado(numero, tipo);
+        registrarResultado(numero,monto,resultadoEvaluado);
         mostrarResultado(numero, tipo, monto, resultadoEvaluado);
     }
     public static char leerTipoApuesta (Scanner in) {
@@ -90,14 +91,7 @@ public class Ruleta {
         return numeroGanador;
     }
 
-    /**
-     * Evalúa si la apuesta realizada por el jugador
-     * fue acertada.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param tipo tipo de apuesta elegida.
-     * @return true si acertó, false si perdió.
-     */
+
     public static boolean evaluarResultado (int numero, char tipo) {
         if (numero == 0) {
             return false;
@@ -130,26 +124,18 @@ public class Ruleta {
         return false;
     }
 
-    /**
-     * Registra los resultados de la ronda en los arreglos
-     * de historial.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param apuesta monto apostado.
-     * @param acierto si el jugador acerto o no.
-     */
-    public static void registrarResultado (int numero, int apuesta, boolean acierto) {
-        // TODO: Guardar los datos sin superar MAX_HISTORIAL.
+    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
+        if (historialSize < MAX_HISTORIAL) {
+            historialNumeros[historialSize] = numero;
+            historialApuestas[historialSize] = apuesta;
+            historialAciertos[historialSize] = acierto;
+            historialSize++;
+
+        } else {
+            System.out.println("historial está lleno. no se guardaran resultados");
+        }
     }
 
-    /**
-     * Muestra en consola el resultado de la ronda.
-     *
-     * @param numero número obtenido en la ruleta.
-     * @param tipo tipo de apuesta realizada.
-     * @param monto monto apostado.
-     * @param acierto si el jugador ganó o perdió.
-     */
     public static void mostrarResultado (int numero, char tipo, int monto, boolean acierto) {
         System.out.println("Número que salió : " + numero);
         if (acierto) {
@@ -160,11 +146,7 @@ public class Ruleta {
         }
     }
 
-    /**
-     * Muestra estadísticas generales de todas las
-     * rondas jugadas.
-     */
     public static void mostrarEstadisticas() {
-        // TODO: Calcular y mostrar las estadísticas acumuladas.
+
     }
 }
