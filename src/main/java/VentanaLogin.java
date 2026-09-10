@@ -8,11 +8,13 @@ public class VentanaLogin {
 
     //--- Componentes de la interfaz gráfica
     private final JFrame frame = new JFrame("Login - Casino Black Cat");
+    private final JFrame frameRegistro = new JFrame("Registro - Casino Black Cat");
     private final JLabel lblUsuario = new JLabel("Usuario: ");
     private final JTextField txtUsuario = new JTextField();
     private final JLabel lblClave = new JLabel("Clave:");
     private final JPasswordField txtClave = new JPasswordField();
     private final JButton btnIngresar = new JButton("Ingresar");
+    private final JButton btnRegistro = new JButton("Registro");
 
 
     public VentanaLogin() {
@@ -32,6 +34,7 @@ public class VentanaLogin {
         txtClave.setBounds(450, 230, 200, 30);
 
         btnIngresar.setBounds(400, 290, 200, 40);
+        btnRegistro.setBounds(400, 340,200, 40 );
 
         frame.setLayout(null);
         frame.add(lblUsuario);
@@ -40,6 +43,7 @@ public class VentanaLogin {
         frame.add(txtClave);
         frame.add(new JLabel(""));
         frame.add(btnIngresar);
+        frame.add(btnRegistro);
 
     }
 
@@ -73,12 +77,10 @@ public class VentanaLogin {
         }
         return "";
     }
-
-    /**
-     * Abre la ventana de registro para crear un nuevo usuario.
-     * Debe cerrar la ventana actual e invocar a VentanaRegistro.
-     */
+    
     private void abrirRegistro() {
-        // TODO: Cerrar la ventana actual y abrir la ventana de registro
+        frame.dispose();
+        frameRegistro.setLocationRelativeTo(null);
+        frameRegistro.setVisible(true);
     }
 }
