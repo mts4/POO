@@ -4,7 +4,7 @@ import java.util.List;
 
 public class VentanaLogin {
     //--- Lista dinámica de usuarios
-    public static final List USUARIOS = new ArrayList<>();
+    public static final List<Usuario> USUARIOS = new ArrayList<>();
 
     //--- Componentes de la interfaz gráfica
     private final JFrame frame = new JFrame("Login - Casino Black Cat");
@@ -16,8 +16,10 @@ public class VentanaLogin {
 
 
     public VentanaLogin() {
-        USUARIOS.add(new Usuario("admin", "1234", "Don Donnie"));
+        USUARIOS.add(new Usuario("admin", "1234", "Dueño casino"));
         USUARIOS.add(new Usuario("jugador", "1111", "JugadorPrueba"));
+
+        btnIngresar.addActionListener(e -> login());
 
         frame.setSize(1000, 500);
         frame.setResizable(false);
@@ -47,25 +49,28 @@ public class VentanaLogin {
         frame.setVisible(true);
     }
 
-    /**
-     * Gestiona el inicio de sesión al presionar el botón.
-     * Debe validar las credenciales ingresadas y abrir la siguiente
-     * ventana o mostrar un mensaje de error.
-     */
+
     private void login() {
-        // TODO: Implementar la lógica de inicio de sesión
+        String u = txtUsuario.getText();
+        String p = new String(txtClave.getPassword());
+
+        String nombreJugador = validarCredenciales(u, p);
+
+        if (!nombreJugador.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "bienvenido, " + nombreJugador + "!");
+            frame.dispose();
+        } else {
+            JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    /**
-     * Valida las credenciales ingresadas utilizando la lista de usuarios.
-     *
-     * @param u nombre de usuario ingresado
-     * @param p contraseña ingresada
-     * @return el nombre del usuario si las credenciales son válidas o una cadena vacía
-     * si no existe una coincidencia
-     */
+
     private String validarCredenciales (String u, String p) {
-        // TODO: Recorrer la lista y validar las credenciales
+        for (Usuario usuario : USUARIOS) {
+            if (usuario.validarCredenciales(u, p)) {
+                return usuario.getNombre();
+            }
+        }
         return "";
     }
 
