@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VentanaLogin {
     //--- Lista dinámica de usuarios
@@ -12,21 +14,37 @@ public class VentanaLogin {
     private final JPasswordField txtClave = new JPasswordField();
     private final JButton btnIngresar = new JButton("Ingresar");
 
-    /**
-     * Constructor que inicializa la ventana de inicio de sesión.
-     * Configura sus componentes y eventos.
-     */
+
     public VentanaLogin() {
-        // TODO: Agregar los usuarios iniciales a la lista
-        // TODO: Inicializar y configurar la ventana
+        USUARIOS.add(new Usuario("admin", "1234", "Don Donnie"));
+        USUARIOS.add(new Usuario("jugador", "1111", "JugadorPrueba"));
+
+        frame.setSize(1000, 500);
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        lblUsuario.setBounds(350, 180, 100, 30);
+        txtUsuario.setBounds(450, 180, 200, 30);
+
+        lblClave.setBounds(350, 230, 100, 30);
+        txtClave.setBounds(450, 230, 200, 30);
+
+        btnIngresar.setBounds(400, 290, 200, 40);
+
+        frame.setLayout(null);
+        frame.add(lblUsuario);
+        frame.add(txtUsuario);
+        frame.add(lblClave);
+        frame.add(txtClave);
+        frame.add(new JLabel(""));
+        frame.add(btnIngresar);
+
     }
 
-    /**
-     * Muestra la ventana en pantalla.
-     * Debe centrarla y hacerla visible.
-     */
+
     public void mostrarVentana() {
-        // TODO: Centrar y mostrar la ventana
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
     /**
