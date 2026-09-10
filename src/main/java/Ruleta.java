@@ -6,8 +6,9 @@ public class Ruleta {
     public static final int MAX_HISTORIAL = 100;
     public static int[] historialNumeros = new int[MAX_HISTORIAL];
     public static int[] historialApuestas = new int[MAX_HISTORIAL];
-    public static boolean[] historialAciertos = new boolean [MAX_HISTORIAL];
+    public static boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
     public static int historialSize = 0;
+    public static int iterador = 0;
     public static Random rng = new Random();
     public static int[] numerosRojos = {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
@@ -141,12 +142,39 @@ public class Ruleta {
         if (acierto) {
             monto = monto;
             System.out.println("Resultado: Has ganado $" + monto);
+
         } else {
             System.out.println("Resultado: Has perdido $" + monto);
         }
     }
 
     public static void mostrarEstadisticas() {
+        int totalAciertos = 0;
+        int totalGanancia = 0;
+        int montoTotal = 0;
+        if (historialSize == 0) {
+            System.out.println("Aún no se han jugado rondas.\n");
+        for (iterador = 0;historialSize > iterador; iterador++) {
+            int apuesta =  historialApuestas[iterador];
+            montoTotal += apuesta;
+
+            if (historialAciertos[iterador]) {
+                totalAciertos += 1;
+                totalGanancia += apuesta;
+            } else{
+                totalGanancia -= apuesta;
+            }
+        }
+            System.out.println("Cantidad de rondas jugadas : " + historialSize);
+            System.out.println("Monto total apostado       : $" + montoTotal);
+            System.out.println("Cantidad total de aciertos : " + totalAciertos);
+
+            if (totalGanancia >= 0) {
+                System.out.println("Ganancia neta              : +$" + totalGanancia);
+            } else {
+                System.out.println("Pérdida neta               : -$" + Math.abs(totalGanancia));
+            }
 
     }
+}
 }
