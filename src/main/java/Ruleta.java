@@ -17,7 +17,7 @@ public class Ruleta {
     };
 
 
-    public static void main(String[] args) {
+    public static void iniciarJuego(String[] args) {
         menu();
     }
 
