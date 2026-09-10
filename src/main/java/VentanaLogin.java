@@ -61,8 +61,9 @@ public class VentanaLogin {
         String nombreJugador = validarCredenciales(u, p);
 
         if (!nombreJugador.isEmpty()) {
-            JOptionPane.showMessageDialog(frame, "bienvenido, " + nombreJugador + "!");
             frame.dispose();
+            VentanaSaludo saludo = new VentanaSaludo(nombreJugador);
+            saludo.mostrarVentana();
         } else {
             JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
