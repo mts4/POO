@@ -1,10 +1,16 @@
 import javax.swing.*;
 
     public class VentanaMenu {
-
-        private final JFrame frame = new JFrame("Bienvenida - Casino Black Cat");
+        private final JFrame frame = new JFrame("Menu - Casino Black Cat");
         private final JLabel lblBienvenida = new JLabel("Bienvenido");
+
         private final JButton btnJugar = new JButton("Jugar");
+        private final JButton btnIniciar = new JButton("Iniciar");
+        private final JButton btnHistorial = new JButton("Historial");
+        private final JButton btnSalir = new JButton("Salir");
+
+        private final JPanel panelMensaje = new JPanel();
+        private final JPanel panelBotones = new JPanel();
 
         public VentanaMenu(String usuario) {
 
