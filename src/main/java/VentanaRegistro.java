@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.util.Scanner;
 
 public class VentanaRegistro {
 
@@ -20,7 +21,7 @@ public class VentanaRegistro {
         configurarFrame();
         addFrame();
         posicionesElementos();
-
+        asignarAcciones();
     }
 
 
@@ -62,5 +63,49 @@ public class VentanaRegistro {
 
         btnRegistrar.setBounds(340, 290, 140, 35);
         btnVolver.setBounds(500, 290, 140, 35);
+    }
+    private void asignarAcciones() {
+
+        btnRegistrar.addActionListener(e -> registrarUsuario());
+        btnVolver.addActionListener(e -> volverLogin());
+
+
+    }
+
+
+    private String[] leerCampos() {
+
+        return new String[0];
+    }
+
+
+    public static int leerOpcion (Scanner in) {
+        int opcion = in.nextInt();
+        return opcion;
+    }
+
+
+    private boolean esFormularioValido(String usuario, String clave, String nombre) {
+
+        return false;
+    }
+
+
+    private void guardarUsuarioEnMemoria(String usuario, String clave, String nombre) {
+
+    }
+
+
+    private void registrarUsuario() {
+        leerCampos();
+        esFormularioValido();
+        guardarUsuarioEnMemoria();
+
+
+    }
+    private void volverLogin() {
+        frame.dispose();
+        VentanaLogin login = new VentanaLogin();
+        login.mostrarVentana();
     }
 }
