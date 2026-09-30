@@ -1,12 +1,12 @@
 import javax.swing.*;
 
-    public class VentanaSaludo {
+    public class VentanaMenu {
 
         private final JFrame frame = new JFrame("Bienvenida - Casino Black Cat");
         private final JLabel lblBienvenida = new JLabel("Bienvenido");
         private final JButton btnJugar = new JButton("Jugar");
 
-        public VentanaSaludo(String usuario) {
+        public VentanaMenu(String usuario) {
 
             frame.setSize(1000, 500);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
