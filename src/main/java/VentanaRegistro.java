@@ -101,10 +101,23 @@ public class VentanaRegistro {
 
 
     private void registrarUsuario() {
-        leerCampos();
-        esFormularioValido();
-        guardarUsuario();
+        String[] campos = leerCampos();
+        String usuario = campos[0];
+        String clave = campos[1];
+        String nombre = campos[2];
 
+        if (esFormularioValido(usuario, clave, nombre)) {
+            guardarUsuario(usuario, clave, nombre);
+
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "¡Registro completado! Ahora puede iniciar sesión.",
+                    "Registro Exitoso",
+                    JOptionPane.INFORMATION_MESSAGE
+            );
+
+            volverLogin();
+        }
 
     }
     private void volverLogin() {
