@@ -1,6 +1,7 @@
 import javax.swing.*;
+import java.awt.*;
 
-    public class VentanaMenu {
+public class VentanaMenu {
         private final JFrame frame = new JFrame("Menu - Casino Black Cat");
         private final JLabel lblBienvenida = new JLabel("Bienvenido");
 
@@ -15,6 +16,8 @@ import javax.swing.*;
         public VentanaMenu(String usuario) {
             configurarFrame();
             configurarBotones();
+            configurarPanelBotones();
+            configurarPanelMensaje();
 
             asignarAcciones();
 
@@ -29,16 +32,31 @@ import javax.swing.*;
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setResizable(false);
             frame.setLayout(null);
-            frame.add(btnJugar);
-            frame.add(lblBienvenida);
+
+            frame.add(panelMensaje);
+            frame.add(panelBotones);
         }
         private void configurarBotones(){
             btnJugar.setBounds(420, 240, 160, 40);
         }
         private void asignarDimBotones(JButton nombreBoton){}
         private void centrarBotones(JButton nombreBoton) {}
-        private void configurarPanelMensaje() {}
-        private void configurarPanelBotones() {}
+        private void configurarPanelMensaje() {
+            panelMensaje.setLayout(null);
+            panelMensaje.add(lblBienvenida);
+            panelMensaje.setBorder(BorderFactory.createLineBorder(Color.RED));
+            panelMensaje.setBounds(400, 50, 590, 350);
+        }
+        private void configurarPanelBotones() {
+            panelBotones.setBounds(10, 50, 380, 350);
+            panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
+            panelBotones.setBorder(BorderFactory.createLineBorder(Color.BLUE));
+
+            panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
+
+
+        }
+
         private void asignarAcciones(){
             btnJugar.addActionListener(e -> jugar());
         }
