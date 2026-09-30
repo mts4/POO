@@ -13,9 +13,16 @@ public class VentanaMenu {
         private final JPanel panelMensaje = new JPanel();
         private final JPanel panelBotones = new JPanel();
 
-        private final Dimension tamanoBoton = new Dimension(200, 40);
+        private final Dimension tamanoBoton = new Dimension(230, 50);
 
-        public VentanaMenu(String usuario) {
+        private final String usuario;
+
+        private final JTextArea txtMensaje = new JTextArea();
+
+
+    public VentanaMenu(String usuario) {
+            this.usuario = usuario;
+            crearMensajeBienvenida();
             configurarFrame();
             configurarBotones();
             configurarPanelBotones();
@@ -57,13 +64,30 @@ public class VentanaMenu {
             panelMensaje.add(lblBienvenida);
             panelMensaje.setBorder(BorderFactory.createLineBorder(Color.RED));
             panelMensaje.setBounds(400, 50, 590, 350);
+            panelMensaje.add(txtMensaje);
+        }
+        private void crearMensajeBienvenida(){
+            txtMensaje.setText(
+                    "RULETA — Casino Black Cat\n\n" +
+                            "Bienvenido/a " + usuario + " al menú principal\n\n" +
+                            "A la izquierda tienes:\n" +
+                            "• Jugar: abre la ventana de juego.\n" +
+                            "• Historial: abre la ventana de historial.\n" +
+                            "• Salir: cierra sesión y vuelve al login."
+            );
+
+            txtMensaje.setEditable(false);
+            txtMensaje.setOpaque(false);
+            txtMensaje.setBounds(50, 50, 500, 280);
+            txtMensaje.setFont(new Font("SansSerif", Font.PLAIN, 20));
+
         }
         private void configurarPanelBotones() {
             panelBotones.setBounds(10, 50, 380, 350);
             panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
             panelBotones.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
-            panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
+            panelBotones.add(Box.createRigidArea(new Dimension(0, 50)));
 
             agregarBotonConMargen(btnIniciar);
             agregarBotonConMargen(btnJugar);
@@ -73,7 +97,7 @@ public class VentanaMenu {
 
         private void agregarBotonConMargen(JButton boton) {
             panelBotones.add(boton);
-            panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
+            panelBotones.add(Box.createRigidArea(new Dimension(0, 15)));
         }
 
         private void asignarAcciones(){
