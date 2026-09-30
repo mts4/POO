@@ -69,19 +69,14 @@ public class VentanaRegistro {
         btnRegistrar.addActionListener(e -> registrarUsuario());
         btnVolver.addActionListener(e -> volverLogin());
 
-
     }
-
 
     private String[] leerCampos() {
+        String usuario = txtUsuario.getText().trim();
+        String clave = new String(txtClave.getPassword()).trim();
+        String nombre = txtNombre.getText().trim();
 
-        return new String[0];
-    }
-
-
-    public static int leerOpcion (Scanner in) {
-        int opcion = in.nextInt();
-        return opcion;
+        return new String[]{ usuario, clave, nombre };
     }
 
 
