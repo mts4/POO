@@ -27,14 +27,14 @@ public class VentanaLogin {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        lblUsuario.setBounds(350, 180, 100, 30);
-        txtUsuario.setBounds(450, 180, 200, 30);
+        lblUsuario.setBounds(350, 140, 100, 30);
+        txtUsuario.setBounds(450, 140, 200, 30);
 
-        lblClave.setBounds(350, 230, 100, 30);
-        txtClave.setBounds(450, 230, 200, 30);
+        lblClave.setBounds(350, 190, 100, 30);
+        txtClave.setBounds(450, 190, 200, 30);
 
-        btnIngresar.setBounds(400, 290, 200, 40);
-        btnRegistro.setBounds(400, 340,200, 40 );
+        btnIngresar.setBounds(400, 250, 200, 40);
+        btnRegistro.setBounds(400, 300,200, 40 );
 
         frame.setLayout(null);
         frame.add(lblUsuario);

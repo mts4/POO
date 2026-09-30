@@ -19,6 +19,7 @@ public class VentanaRegistro {
     public VentanaRegistro(){
         configurarFrame();
         addFrame();
+        posicionesElementos();
 
     }
 
@@ -48,5 +49,18 @@ public class VentanaRegistro {
 
         frame.add(btnRegistrar);
         frame.add(btnVolver);
+    }
+    private void posicionesElementos(){
+        lblUsuario.setBounds(300, 110, 130, 30);
+        txtUsuario.setBounds(440, 110, 260, 30);
+
+        lblClave.setBounds(300, 160, 130, 30);
+        txtClave.setBounds(440, 160, 260, 30);
+
+        lblNombre.setBounds(300, 210, 130, 30);
+        txtNombre.setBounds(440, 210, 260, 30);
+
+        btnRegistrar.setBounds(340, 290, 140, 35);
+        btnVolver.setBounds(500, 290, 140, 35);
     }
 }
