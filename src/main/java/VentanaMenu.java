@@ -13,32 +13,35 @@ import javax.swing.*;
         private final JPanel panelBotones = new JPanel();
 
         public VentanaMenu(String usuario) {
+            configurarFrame();
+            configurarBotones();
 
-            frame.setSize(1000, 500);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setResizable(false);
-            frame.setLayout(null);
+            asignarAcciones();
 
-            lblBienvenida.setText("¡Bienvenido, " + usuario + "!");
-            lblBienvenida.setBounds(200, 170, 600, 40);
-            lblBienvenida.setHorizontalAlignment(SwingConstants.CENTER);
-            frame.add(lblBienvenida);
 
-            btnJugar.setBounds(420, 240, 160, 40);
-            btnJugar.addActionListener(e -> jugar());
-            frame.add(btnJugar);
         }
         public void mostrarVentana() {
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         }
-        private void configurarFrame(){}
-        private void configurarBotones(){}
+        private void configurarFrame(){
+            frame.setSize(1000, 500);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setResizable(false);
+            frame.setLayout(null);
+            frame.add(btnJugar);
+            frame.add(lblBienvenida);
+        }
+        private void configurarBotones(){
+            btnJugar.setBounds(420, 240, 160, 40);
+        }
         private void asignarDimBotones(JButton nombreBoton){}
         private void centrarBotones(JButton nombreBoton) {}
-        private void crearPanelMensaje() {}
-        private void crearPanelBotones() {}
-        private void asignarAcciones(){}
+        private void configurarPanelMensaje() {}
+        private void configurarPanelBotones() {}
+        private void asignarAcciones(){
+            btnJugar.addActionListener(e -> jugar());
+        }
 
 
 
