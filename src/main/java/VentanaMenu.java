@@ -13,6 +13,8 @@ public class VentanaMenu {
         private final JPanel panelMensaje = new JPanel();
         private final JPanel panelBotones = new JPanel();
 
+        private final Dimension tamanoBoton = new Dimension(200, 40);
+
         public VentanaMenu(String usuario) {
             configurarFrame();
             configurarBotones();
@@ -37,10 +39,19 @@ public class VentanaMenu {
             frame.add(panelBotones);
         }
         private void configurarBotones(){
-            btnJugar.setBounds(420, 240, 160, 40);
+            for (JButton botonNombre : new JButton[]{btnIniciar, btnJugar, btnHistorial, btnSalir}) {
+                asignarDimBotones(botonNombre);
+                centrarBotones(botonNombre);
+            }
         }
-        private void asignarDimBotones(JButton nombreBoton){}
-        private void centrarBotones(JButton nombreBoton) {}
+        private void asignarDimBotones(JButton nombreBoton){
+            nombreBoton.setPreferredSize(tamanoBoton);
+            nombreBoton.setMaximumSize(tamanoBoton);
+        }
+        private void centrarBotones(JButton nombreBoton) {
+            nombreBoton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        }
+
         private void configurarPanelMensaje() {
             panelMensaje.setLayout(null);
             panelMensaje.add(lblBienvenida);
@@ -54,7 +65,15 @@ public class VentanaMenu {
 
             panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
 
+            agregarBotonConMargen(btnIniciar);
+            agregarBotonConMargen(btnJugar);
+            agregarBotonConMargen(btnHistorial);
+            agregarBotonConMargen(btnSalir);
+        }
 
+        private void agregarBotonConMargen(JButton boton) {
+            panelBotones.add(boton);
+            panelBotones.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
         private void asignarAcciones(){
