@@ -3,12 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VentanaLogin {
-    //--- Lista dinámica de usuarios
+
     public static final List<Usuario> USUARIOS = new ArrayList<>();
 
-    //--- Componentes de la interfaz gráfica
+
     private final JFrame frame = new JFrame("Login - Casino Black Cat");
-    private final JFrame frameRegistro = new JFrame("Registro - Casino Black Cat");
     private final JLabel lblUsuario = new JLabel("Usuario: ");
     private final JTextField txtUsuario = new JTextField();
     private final JLabel lblClave = new JLabel("Clave:");
@@ -22,6 +21,7 @@ public class VentanaLogin {
         USUARIOS.add(new Usuario("jugador", "1111", "JugadorPrueba"));
 
         btnIngresar.addActionListener(e -> login());
+        btnRegistro.addActionListener(e -> abrirRegistro());
 
         frame.setSize(1000, 500);
         frame.setResizable(false);
@@ -81,7 +81,8 @@ public class VentanaLogin {
     
     private void abrirRegistro() {
         frame.dispose();
-        frameRegistro.setLocationRelativeTo(null);
-        frameRegistro.setVisible(true);
+        VentanaRegistro ventanaRegistro = new VentanaRegistro();
+        ventanaRegistro.mostrarVentana();
+
     }
 }
