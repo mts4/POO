@@ -22,8 +22,9 @@ public class VentanaMenu {
 
     public VentanaMenu(String usuario) {
         this.usuario = usuario;
-        crearMensajeBienvenida();
+
         configurarFrame();
+        crearMensajeBienvenida();
         configurarBotones();
         configurarPanelBotones();
         configurarPanelMensaje();
