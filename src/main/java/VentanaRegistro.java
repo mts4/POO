@@ -81,20 +81,29 @@ public class VentanaRegistro {
 
 
     private boolean esFormularioValido(String usuario, String clave, String nombre) {
-
-        return false;
+        if (usuario.isEmpty() || clave.isEmpty() || nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Por favor, complete todos los campos antes de continuar.",
+                    "Campos Incompletos",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return false;
+        }
+        return true;
     }
 
 
-    private void guardarUsuarioEnMemoria(String usuario, String clave, String nombre) {
-
+    private void guardarUsuario(String usuario, String clave, String nombre) {
+        Usuario nuevoUsuario = new Usuario(usuario, clave, nombre);
+        VentanaLogin.USUARIOS.add(nuevoUsuario);
     }
 
 
     private void registrarUsuario() {
         leerCampos();
         esFormularioValido();
-        guardarUsuarioEnMemoria();
+        guardarUsuario();
 
 
     }
