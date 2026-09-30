@@ -26,6 +26,15 @@ import javax.swing.*;
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
         }
+        private void configurarFrame(){}
+        private void configurarBotones(){}
+        private void asignarDimBotones(JButton nombreBoton){}
+        private void centrarBotones(JButton nombreBoton) {}
+        private void crearPanelMensaje() {}
+        private void crearPanelBotones() {}
+        private void asignarAcciones(){}
+
+
 
         private void jugar() {
             frame.dispose();
