@@ -99,7 +99,33 @@ public class VentanaRuleta {
         }
     }
     private void ejecutarGiro() {
+        int monto = (Integer) spinnerApuesta.getValue();
+        String tipoApuesta = (String) comboTipo.getSelectedItem();
+        String seleccion = obtenerSeleccionActual();
 
+        int numeroSalido = Ruleta.numeroAleatorio();
+        boolean acierto = Ruleta.evaluarApuesta(tipoApuesta, seleccion, numeroSalido);
+        Ruleta.registrarResultado(numeroSalido, monto, acierto);
+
+        int nuevoSaldo = Ruleta.actualizarSaldo(monto, acierto);
+        txtSaldo.setText("Saldo: " + nuevoSaldo);
+
+        mostrarResultado(numeroSalido, seleccion, monto, acierto, nuevoSaldo);
     }
 
+    private String obtenerSeleccionActual() {
+        return comboColor.isEnabled()
+                ? (String) comboColor.getSelectedItem()
+                : (String) comboParidad.getSelectedItem();
+    }
+
+    private void mostrarResultado(int numero, String seleccion, int monto, boolean acierto, int saldoActual) {
+        String colorNumero = Ruleta.obtenerColorTexto(numero);
+        String estado = acierto ? "GANASTE" : "PERDISTE";
+
+        lblResultado.setText(String.format(
+                "Número %d (%s) | Apuesta=%s | Monto=$%d | %s | Saldo=%d",
+                numero, colorNumero, seleccion, monto, estado, saldoActual
+        ));
+    }
 }

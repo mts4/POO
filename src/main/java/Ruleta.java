@@ -8,6 +8,7 @@ public class Ruleta {
     public static boolean[] historialAciertos = new boolean[MAX_HISTORIAL];
     public static int historialSize = 0;
     public static Random rng = new Random();
+    public static int saldo = 1000;
     public static int[] numerosRojos = {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
             19, 21, 23,
@@ -77,11 +78,20 @@ public class Ruleta {
             System.out.println("Resultado: Has perdido $" + monto);
         }
     }
+    public static int actualizarSaldo(int monto, boolean acierto) {
+        if (acierto) {
+            saldo += monto;
+        } else {
+            saldo -= monto;
+        }
+        return saldo;
+    }
 
     public static void mostrarEstadisticas() {
         int totalAciertos = 0;
         int totalGanancia = 0;
         int montoTotal = 0;
+        int iterador = 0;
         if (historialSize == 0) {
         for (iterador = 0;historialSize > iterador; iterador++) {
             int apuesta =  historialApuestas[iterador];
