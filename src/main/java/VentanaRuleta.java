@@ -30,12 +30,11 @@ public class VentanaRuleta {
         configurarFrame();
         displayJcombo();
         displayJlabel();
+        displayTxt();
         displayBoton();
         addFrame();
         montoApuesta();
-        spinnerApuesta.setBounds(350, 285, 150, 30);
-        txtMensaje.setBounds(700, 285, 150, 30);
-        btnGirar.setBounds(550,285,150,30);
+
 
     }
     public void mostrarVentana() {
@@ -43,7 +42,7 @@ public class VentanaRuleta {
         frame.setVisible(true);
 
     }
-    public void configurarFrame(){
+    private void configurarFrame(){
         frame.setSize(1000, 500);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +50,7 @@ public class VentanaRuleta {
         frame.setLayout(null);
     }
 
-    public void addFrame(){
+    private void addFrame(){
         for (JLabel jLabel : Arrays.asList(lblTipo, lblColor, lblMonto, lblParidad)) frame.add(jLabel);
         for (JComboBox<String> stringJComboBox : Arrays.asList(comboTipo, comboColor, comboParidad))
             frame.add(stringJComboBox);
@@ -59,25 +58,27 @@ public class VentanaRuleta {
         frame.add(btnGirar);
         frame.add(txtMensaje);
     }
-    public void displayJcombo(){
+    private void displayJcombo(){
 
         comboTipo.setBounds(350, 50, 500, 30);
         comboColor.setBounds(350, 125, 500, 30);
         comboParidad.setBounds(350, 200, 500, 30);
 
     }
-    public void displayJlabel(){
+    private void displayJlabel(){
         lblTipo.setBounds(200, 45, 200 ,40 );
         lblColor.setBounds(200, 120, 200 ,40 );
         lblParidad.setBounds(200, 195, 200 ,40 );
         lblMonto.setBounds(200, 280, 200 ,40 );
-
+    }
+    private void displayTxt(){
         txtMensaje.setBounds(200, 240, 600, 180);
         txtMensaje.setEditable(false);
         txtMensaje.setFont(new Font("Monospaced", Font.BOLD, 13));
     }
-    public void displayBoton(){
+    private void displayBoton(){
         btnGirar.setBounds(550,285,150,30);
+        spinnerApuesta.setBounds(350, 285, 150, 30);
     }
     public void montoApuesta(){
 
