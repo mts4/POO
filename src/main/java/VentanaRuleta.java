@@ -9,6 +9,7 @@ public class VentanaRuleta {
     private final JLabel lblColor = new JLabel("Seleccione color:");
     private final JLabel lblParidad = new JLabel("Seleccione paridad:");
     private final JLabel lblMonto = new JLabel("Monto:");
+    private final JLabel lblResultado = new JLabel("");
     private final JButton btnGirar = new JButton("Girar");
     private final JTextField txtSaldo = new JTextField("Saldo: 1000");
 
@@ -30,14 +31,12 @@ public class VentanaRuleta {
 
     public VentanaRuleta() {
         configurarFrame();
-        displayJcombo();
-        displayJlabel();
-        displayTxt();
-        displayBoton();
+        configuracionJcombo();
+        configuracionJlabel();
+        configuracionTxt();
+        configuracionBoton();
         addFrame();
-        montoApuesta();
-
-
+        configurarEventos();
     }
     public void mostrarVentana() {
         frame.setLocationRelativeTo(null);
@@ -58,30 +57,47 @@ public class VentanaRuleta {
         frame.add(spinnerApuesta);
         frame.add(btnGirar);
         frame.add(txtSaldo);
+        frame.add(lblResultado);
     }
-    private void displayJcombo(){
+    private void configuracionJcombo(){
 
         comboTipo.setBounds(350, 50, 500, 30);
         comboColor.setBounds(350, 125, 500, 30);
         comboParidad.setBounds(350, 200, 500, 30);
+        comboParidad.setEnabled(false);
 
     }
-    private void displayJlabel(){
+    private void configuracionJlabel(){
         lblTipo.setBounds(200, 45, 200 ,40 );
         lblColor.setBounds(200, 120, 200 ,40 );
         lblParidad.setBounds(200, 195, 200 ,40 );
         lblMonto.setBounds(200, 280, 200 ,40 );
+        lblResultado.setBounds(200, 350, 620, 30);
+        lblResultado.setFont(new Font("SansSerif", Font.BOLD, 12));
     }
-    private void displayTxt(){
+    private void configuracionTxt(){
         txtSaldo.setBounds(700, 285, 150, 30);
         txtSaldo.setEditable(false);
         txtSaldo.setFocusable(false);
     }
-    private void displayBoton(){
+    private void configuracionBoton(){
         btnGirar.setBounds(525,285,150,30);
         spinnerApuesta.setBounds(350, 285, 150, 30);
     }
-    public void montoApuesta(){
+    private void configurarEventos(){
+        comboTipo.addActionListener(e -> actualizarEstadoDesplegables());
+    }
+    private void actualizarEstadoDesplegables() {
+        String seleccion = (String) comboTipo.getSelectedItem();
+        if ("Color".equalsIgnoreCase(seleccion)) {
+            comboColor.setEnabled(true);
+            comboParidad.setEnabled(false);
+        } else {
+            comboColor.setEnabled(false);
+            comboParidad.setEnabled(true);
+        }
+    }
+    private void ejecutarGiro() {
 
     }
 
