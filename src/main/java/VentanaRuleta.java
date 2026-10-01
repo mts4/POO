@@ -10,7 +10,7 @@ public class VentanaRuleta {
     private final JLabel lblParidad = new JLabel("Seleccione paridad:");
     private final JLabel lblMonto = new JLabel("Monto:");
     private final JButton btnGirar = new JButton("Girar");
-    private final JTextArea txtMensaje = new JTextArea("");
+    private final JTextField txtSaldo = new JTextField("Saldo: 1000");
 
 
     String[] tipo = {"Color", "Numero"};
@@ -23,6 +23,8 @@ public class VentanaRuleta {
 
     SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 0, 1000, 10);
     JSpinner spinnerApuesta = new JSpinner(modeloMonto);
+
+    private int saldoInicial = 1000;
 
 
 
@@ -44,7 +46,6 @@ public class VentanaRuleta {
     }
     private void configurarFrame(){
         frame.setSize(1000, 500);
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
@@ -56,7 +57,7 @@ public class VentanaRuleta {
             frame.add(stringJComboBox);
         frame.add(spinnerApuesta);
         frame.add(btnGirar);
-        frame.add(txtMensaje);
+        frame.add(txtSaldo);
     }
     private void displayJcombo(){
 
@@ -72,12 +73,12 @@ public class VentanaRuleta {
         lblMonto.setBounds(200, 280, 200 ,40 );
     }
     private void displayTxt(){
-        txtMensaje.setBounds(200, 240, 600, 180);
-        txtMensaje.setEditable(false);
-        txtMensaje.setFont(new Font("Monospaced", Font.BOLD, 13));
+        txtSaldo.setBounds(700, 285, 150, 30);
+        txtSaldo.setEditable(false);
+        txtSaldo.setFocusable(false);
     }
     private void displayBoton(){
-        btnGirar.setBounds(550,285,150,30);
+        btnGirar.setBounds(525,285,150,30);
         spinnerApuesta.setBounds(350, 285, 150, 30);
     }
     public void montoApuesta(){
