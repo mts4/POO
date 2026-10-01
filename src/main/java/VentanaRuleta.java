@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
 
 public class VentanaRuleta {
 
@@ -13,11 +15,22 @@ public class VentanaRuleta {
     String[] color = {"Rojo", "Negro"};
     String[] paridad = {"Par", "Impar"};
 
+    private final JComboBox<String> comboTipo = new JComboBox<>(tipo);
+    private final JComboBox<String> comboColor = new JComboBox<>(color);
+    private final JComboBox<String> comboParidad = new JComboBox<>(paridad);
+
+    SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 0, 1000, 10);
+    JSpinner spinnerApuesta = new JSpinner(modeloMonto);
 
 
 
     public VentanaRuleta() {
-        crearJcombo();
+        displayJcombo();
+        displayJlabel();
+        addFrame();
+        montoApuesta();
+        spinnerApuesta.setBounds(350, 285, 200, 30);
+
     }
     public void mostrarVentana() {
         frame.setSize(1000, 500);
@@ -26,15 +39,34 @@ public class VentanaRuleta {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
+
+
+        btnGirar.setBounds(600,285,150,30);
+
     }
-    public void crearJcombo(){
-        JComboBox<String> comboTipo = new JComboBox<>(tipo);
-        JComboBox<String> comboColor = new JComboBox<>(color);
-        JComboBox<String> comboParidad = new JComboBox<>(paridad);
+
+    public void addFrame(){
+        frame.add(spinnerApuesta);
+        for (JLabel jLabel : Arrays.asList(lblTipo, lblColor, lblMonto, lblParidad)) frame.add(jLabel);
+        for (JComboBox<String> stringJComboBox : Arrays.asList(comboTipo, comboColor, comboParidad))
+            frame.add(stringJComboBox);
+        frame.add(btnGirar);
+    }
+    public void displayJcombo(){
+
+        comboTipo.setBounds(350, 50, 500, 30);
+        comboColor.setBounds(350, 125, 500, 30);
+        comboParidad.setBounds(350, 200, 500, 30);
+
+    }
+    public void displayJlabel(){
+        lblTipo.setBounds(200, 45, 200 ,40 );
+        lblColor.setBounds(200, 120, 200 ,40 );
+        lblParidad.setBounds(200, 195, 200 ,40 );
+        lblMonto.setBounds(200, 280, 200 ,40 );
     }
     public void montoApuesta(){
-        SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 0, 1000, 10);
-        JSpinner spinnerApuesta = new JSpinner(modeloMonto);
+
     }
 
 }
