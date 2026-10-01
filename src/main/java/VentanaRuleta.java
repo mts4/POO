@@ -86,6 +86,7 @@ public class VentanaRuleta {
     }
     private void configurarEventos(){
         comboTipo.addActionListener(e -> actualizarEstadoDesplegables());
+        btnGirar.addActionListener(e -> ejecutarGiro());
     }
     private void actualizarEstadoDesplegables() {
         String seleccion = (String) comboTipo.getSelectedItem();
