@@ -1,14 +1,12 @@
 package Vista;
 
-import Modelo.Usuario;
-
+import Controlador.SessionController;
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class VentanaLogin {
 
-    public static final List<Usuario> USUARIOS = new ArrayList<>();
+    private final SessionController session;
 
 
     private final JFrame frame = new JFrame("Login - Casino Black Cat");
@@ -20,9 +18,8 @@ public class VentanaLogin {
     private final JButton btnRegistro = new JButton("Registro");
 
 
-    public VentanaLogin() {
-        USUARIOS.add(new Usuario("admin", "1234", "Dueño casino"));
-        USUARIOS.add(new Usuario("jugador", "1111", "JugadorPrueba"));
+    public VentanaLogin(SessionController session) {
+        this.session = session;
 
         btnIngresar.addActionListener(e -> login());
         btnRegistro.addActionListener(e -> abrirRegistro());
@@ -59,34 +56,22 @@ public class VentanaLogin {
 
 
     private void login() {
-        String u = txtUsuario.getText();
-        String p = new String(txtClave.getPassword());
+        String u = txtUsuario.getText().trim();
+        String p = new String(txtClave.getPassword()).trim();
 
-        String nombreJugador = validarCredenciales(u, p);
+        boolean ingreso = session.iniciarSesion(u, p);
 
-        if (!nombreJugador.isEmpty()) {
+        if (ingreso) {
             frame.dispose();
-            VentanaMenu saludo = new VentanaMenu(nombreJugador);
-            saludo.mostrarVentana();
+            new VentanaMenu(session).mostrarVentana();
         } else {
             JOptionPane.showMessageDialog(frame, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-
-    private String validarCredenciales (String u, String p) {
-        for (Usuario usuario : USUARIOS) {
-            if (usuario.validarCredenciales(u, p)) {
-                return usuario.getNombre();
-            }
-        }
-        return "";
-    }
     
     private void abrirRegistro() {
         frame.dispose();
-        VentanaRegistro ventanaRegistro = new VentanaRegistro();
-        ventanaRegistro.mostrarVentana();
-
+        new VentanaRegistro(session).mostrarVentana();
     }
 }

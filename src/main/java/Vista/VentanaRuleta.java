@@ -1,39 +1,36 @@
 package Vista;
 
-import Modelo.Ruleta;
+import Controlador.RuletaController;
+import Controlador.SessionController;
+import Modelo.Resultado;
+import Modelo.TipoApuesta;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 public class VentanaRuleta {
 
+    private final SessionController session;
+    private final RuletaController controlador;
+
     private final JFrame frame = new JFrame("Ruleta - Casino Black Cat");
     private final JLabel lblTipo = new JLabel("Tipo de apuesta:");
-    private final JLabel lblColor = new JLabel("Seleccione color:");
-    private final JLabel lblParidad = new JLabel("Seleccione paridad:");
     private final JLabel lblMonto = new JLabel("Monto:");
     private final JLabel lblResultado = new JLabel("");
     private final JButton btnGirar = new JButton("Girar");
-    private final JTextField txtSaldo = new JTextField("Saldo: 1000");
+    private final JButton btnVolver = new JButton("Volver al Menú");
+    private final JTextField txtSaldo = new JTextField();
 
+    // Uso de TipoApuesta en JComboBox según Listing 7 de la guía
+    private final JComboBox<TipoApuesta> cboTipo = new JComboBox<>(TipoApuesta.values());
 
-    String[] tipo = {"Color", "Numero"};
-    String[] color = {"Rojo", "Negro"};
-    String[] paridad = {"Par", "Impar"};
+    private final SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 10, 10000, 10);
+    private final JSpinner spinnerApuesta = new JSpinner(modeloMonto);
 
-    private final JComboBox<String> comboTipo = new JComboBox<>(tipo);
-    private final JComboBox<String> comboColor = new JComboBox<>(color);
-    private final JComboBox<String> comboParidad = new JComboBox<>(paridad);
+    public VentanaRuleta(SessionController session) {
+        this.session = session;
+        this.controlador = session.getRuletaController();
 
-    SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 0, 1000, 10);
-    JSpinner spinnerApuesta = new JSpinner(modeloMonto);
-
-    private int saldoInicial = 1000;
-
-
-
-    public VentanaRuleta() {
         configurarFrame();
         configuracionJcombo();
         configuracionJlabel();
@@ -42,94 +39,97 @@ public class VentanaRuleta {
         addFrame();
         configurarEventos();
     }
+
     public void mostrarVentana() {
+        actualizarSaldoVista();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
-    private void configurarFrame(){
+
+    private void configurarFrame() {
         frame.setSize(1000, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLayout(null);
     }
 
-    private void addFrame(){
-        for (JLabel jLabel : Arrays.asList(lblTipo, lblColor, lblMonto, lblParidad)) frame.add(jLabel);
-        for (JComboBox<String> stringJComboBox : Arrays.asList(comboTipo, comboColor, comboParidad))
-            frame.add(stringJComboBox);
+    private void addFrame() {
+        frame.add(lblTipo);
+        frame.add(lblMonto);
+        frame.add(cboTipo);
         frame.add(spinnerApuesta);
         frame.add(btnGirar);
+        frame.add(btnVolver);
         frame.add(txtSaldo);
         frame.add(lblResultado);
     }
-    private void configuracionJcombo(){
 
-        comboTipo.setBounds(350, 50, 500, 30);
-        comboColor.setBounds(350, 125, 500, 30);
-        comboParidad.setBounds(350, 200, 500, 30);
-        comboParidad.setEnabled(false);
+    private void configuracionJcombo() {
+        cboTipo.setBounds(350, 120, 500, 35);
+    }
 
+    private void configuracionJlabel() {
+        lblTipo.setBounds(200, 115, 200, 40);
+        lblMonto.setBounds(200, 200, 200, 40);
+        lblResultado.setBounds(200, 290, 650, 30);
+        lblResultado.setFont(new Font("SansSerif", Font.BOLD, 13));
     }
-    private void configuracionJlabel(){
-        lblTipo.setBounds(200, 45, 200 ,40 );
-        lblColor.setBounds(200, 120, 200 ,40 );
-        lblParidad.setBounds(200, 195, 200 ,40 );
-        lblMonto.setBounds(200, 280, 200 ,40 );
-        lblResultado.setBounds(200, 350, 620, 30);
-        lblResultado.setFont(new Font("SansSerif", Font.BOLD, 12));
-    }
-    private void configuracionTxt(){
-        txtSaldo.setBounds(700, 285, 150, 30);
+
+    private void configuracionTxt() {
+        txtSaldo.setBounds(700, 205, 150, 30);
         txtSaldo.setEditable(false);
         txtSaldo.setFocusable(false);
+        actualizarSaldoVista();
     }
-    private void configuracionBoton(){
-        btnGirar.setBounds(525,285,150,30);
-        spinnerApuesta.setBounds(350, 285, 150, 30);
+
+    private void configuracionBoton() {
+        spinnerApuesta.setBounds(350, 205, 150, 30);
+        btnGirar.setBounds(525, 205, 150, 30);
+        btnVolver.setBounds(200, 360, 180, 35);
     }
-    private void configurarEventos(){
-        comboTipo.addActionListener(e -> actualizarEstadoDesplegables());
+
+    private void configurarEventos() {
         btnGirar.addActionListener(e -> ejecutarGiro());
+        btnVolver.addActionListener(e -> volverAlMenu());
     }
-    private void actualizarEstadoDesplegables() {
-        String seleccion = (String) comboTipo.getSelectedItem();
-        if ("Color".equalsIgnoreCase(seleccion)) {
-            comboColor.setEnabled(true);
-            comboParidad.setEnabled(false);
-        } else {
-            comboColor.setEnabled(false);
-            comboParidad.setEnabled(true);
-        }
+
+    private void actualizarSaldoVista() {
+        txtSaldo.setText("Saldo: $" + controlador.getSaldo());
     }
+
     private void ejecutarGiro() {
         int monto = (Integer) spinnerApuesta.getValue();
-        String tipoApuesta = (String) comboTipo.getSelectedItem();
-        String seleccion = obtenerSeleccionActual();
+        TipoApuesta tipo = (TipoApuesta) cboTipo.getSelectedItem();
 
-        int numeroSalido = Ruleta.numeroAleatorio();
-        boolean acierto = Ruleta.evaluarApuesta(tipoApuesta, seleccion, numeroSalido);
-        Ruleta.registrarResultado(numeroSalido, monto, acierto);
+        // La Vista delega la coordinación al Controlador (Listing 2)
+        Resultado resultado = controlador.realizarApuesta(tipo, monto);
 
-        int nuevoSaldo = Ruleta.actualizarSaldo(monto, acierto);
-        txtSaldo.setText("Saldo: " + nuevoSaldo);
+        if (resultado == null) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    "Saldo insuficiente o monto inválido. Recargue saldo en su Perfil.",
+                    "Apuesta no permitida",
+                    JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
-        mostrarResultado(numeroSalido, seleccion, monto, acierto, nuevoSaldo);
+        actualizarSaldoVista();
+        mostrarResultado(resultado);
     }
 
-    private String obtenerSeleccionActual() {
-        return comboColor.isEnabled()
-                ? (String) comboColor.getSelectedItem()
-                : (String) comboParidad.getSelectedItem();
-    }
-
-    private void mostrarResultado(int numero, String seleccion, int monto, boolean acierto, int saldoActual) {
-        String colorNumero = Ruleta.obtenerColorTexto(numero);
-        String estado = acierto ? "GANASTE" : "PERDISTE";
+    private void mostrarResultado(Resultado res) {
+        String colorNumero = controlador.obtenerColorTexto(res.getNumero());
+        String estado = res.isAcierto() ? "GANASTE" : "PERDISTE";
 
         lblResultado.setText(String.format(
-                "Número %d (%s) | Apuesta=%s | Monto=$%d | %s | Saldo=%d",
-                numero, colorNumero, seleccion, monto, estado, saldoActual
+                "Número %d (%s) | Apuesta=%s | Monto=$%d | %s | Saldo=$%d",
+                res.getNumero(), colorNumero, res.getTipo(), res.getMonto(), estado, controlador.getSaldo()
         ));
+    }
+
+    private void volverAlMenu() {
+        frame.dispose();
+        new VentanaMenu(session).mostrarVentana();
     }
 }
