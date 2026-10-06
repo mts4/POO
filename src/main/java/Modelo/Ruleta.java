@@ -19,9 +19,7 @@ public class Ruleta {
         this.rng = new Random();
         this.saldo = Math.max(0, saldoInicial);
     }
-    public int numeroAleatorio(){
-        return rng.nextInt(CANTIDAD_NUMEROS);
-    }
+
     public int getSaldo() {
         return saldo;
     }
@@ -30,6 +28,10 @@ public class Ruleta {
         if (saldo >= 0) {
             this.saldo = saldo;
         }
+    }
+
+    public int numeroAleatorio(){
+        return rng.nextInt(CANTIDAD_NUMEROS);
     }
 
     public static boolean esRojo(int n) {
@@ -45,27 +47,15 @@ public class Ruleta {
         return esRojo(numero) ? "Rojo" : "Negro";
     }
 
-    public static boolean evaluarApuesta(String tipo, String seleccion, int numeroSalido) {
-        if (numeroSalido == 0) {
-            return false;
-        }
+    public static boolean evaluarApuesta(int numero, TipoApuesta tipo) {
+        if (numero == 0 || tipo == null) return false;
 
-        if ("Color".equalsIgnoreCase(tipo)) {
-            boolean esRojoNum = esRojo(numeroSalido);
-            if ("Rojo".equalsIgnoreCase(seleccion)) {
-                return esRojoNum;
-            } else if ("Negro".equalsIgnoreCase(seleccion)) {
-                return !esRojoNum;
-            }
-        } else {
-            boolean esParNum = (numeroSalido % 2 == 0);
-            if ("Par".equalsIgnoreCase(seleccion)) {
-                return esParNum;
-            } else if ("Impar".equalsIgnoreCase(seleccion)) {
-                return !esParNum;
-            }
-        }
-        return false;
+        return switch (tipo) {
+            case ROJO -> esRojo(numero);
+            case NEGRO -> !esRojo(numero);
+            case PAR -> numero % 2 == 0;
+            case IMPAR -> numero % 2 != 0;
+        };
     }
 
     public int actualizarSaldo(int monto, boolean acierto) {
