@@ -24,5 +24,17 @@ public class RuletaController {
         return ruleta.obtenerColorTexto(numero);
     }
 
+    public Resultado realizarApuesta(TipoApuesta tipo, int monto) {
+        if (monto <= 0 || monto > ruleta.getSaldo()) {
+            return null;
+        }
 
+        int numeroSalido = ruleta.numeroAleatorio();
+        boolean acierto = ruleta.evaluarApuesta(numeroSalido, tipo);
+        ruleta.actualizarSaldo(monto, acierto);
+
+        resultadoController.registrarResultado(numeroSalido, monto, acierto, tipo);
+
+        return new Resultado(numeroSalido, monto, acierto, tipo);
+    }
 }
