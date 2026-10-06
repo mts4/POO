@@ -65,4 +65,11 @@ public class Ruleta {
         }
         return saldo;
     }
+    public boolean depositar(int monto) {
+        if (monto <= 0) {
+            return false;
+        }
+        this.saldo += monto;
+        return true;
+    }
 }
