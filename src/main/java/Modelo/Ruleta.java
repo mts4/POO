@@ -3,8 +3,8 @@ package Modelo;
 import java.util.Random;
 
 public class Ruleta {
-    public static final int CANTIDAD_NUMEROS = 37;
-    public static int[] numerosRojos = {
+    private static final int CANTIDAD_NUMEROS = 37;
+    private static int[] numerosRojos = {
             1, 3, 5, 7, 9, 12, 14, 16, 18,
             19, 21, 23,
             25, 27, 30, 32, 34, 36
@@ -34,7 +34,7 @@ public class Ruleta {
         return rng.nextInt(CANTIDAD_NUMEROS);
     }
 
-    public static boolean esRojo(int n) {
+    public boolean esRojo(int n) {
         for (int numerosRojo : numerosRojos) {
             if (numerosRojo == n) {
                 return true;
@@ -42,12 +42,12 @@ public class Ruleta {
         }
         return false;
     }
-    public static String obtenerColorTexto(int numero) {
+    public String obtenerColorTexto(int numero) {
         if (numero == 0) return "Verde";
         return esRojo(numero) ? "Rojo" : "Negro";
     }
 
-    public static boolean evaluarApuesta(int numero, TipoApuesta tipo) {
+    public boolean evaluarApuesta(int numero, TipoApuesta tipo) {
         if (numero == 0 || tipo == null) return false;
 
         return switch (tipo) {
@@ -57,7 +57,6 @@ public class Ruleta {
             case IMPAR -> numero % 2 != 0;
         };
     }
-
     public int actualizarSaldo(int monto, boolean acierto) {
         if (acierto) {
             saldo += monto;
