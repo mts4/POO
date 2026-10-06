@@ -70,16 +70,6 @@ public class Ruleta {
         }
     }
 
-    public static void mostrarResultado (int numero, char tipo, int monto, boolean acierto) {
-        System.out.println("Número que salió : " + numero);
-        if (acierto) {
-            monto = monto;
-            System.out.println("Resultado: Has ganado $" + monto);
-
-        } else {
-            System.out.println("Resultado: Has perdido $" + monto);
-        }
-    }
     public static int actualizarSaldo(int monto, boolean acierto) {
         if (acierto) {
             saldo += monto;
@@ -88,34 +78,4 @@ public class Ruleta {
         }
         return saldo;
     }
-
-    public static void mostrarEstadisticas() {
-        int totalAciertos = 0;
-        int totalGanancia = 0;
-        int montoTotal = 0;
-        int iterador = 0;
-        if (historialSize == 0) {
-        for (iterador = 0;historialSize > iterador; iterador++) {
-            int apuesta =  historialApuestas[iterador];
-            montoTotal += apuesta;
-
-            if (historialAciertos[iterador]) {
-                totalAciertos += 1;
-                totalGanancia += apuesta;
-            } else{
-                totalGanancia -= apuesta;
-            }
-        }
-            System.out.println("Cantidad de rondas jugadas : " + historialSize);
-            System.out.println("Monto total apostado       : $" + montoTotal);
-            System.out.println("Cantidad total de aciertos : " + totalAciertos);
-
-            if (totalGanancia >= 0) {
-                System.out.println("Ganancia neta              : +$" + totalGanancia);
-            } else {
-                System.out.println("Pérdida neta               : -$" + Math.abs(totalGanancia));
-            }
-
-    }
-}
 }
