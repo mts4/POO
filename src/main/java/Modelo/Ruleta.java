@@ -22,6 +22,15 @@ public class Ruleta {
     public int numeroAleatorio(){
         return rng.nextInt(CANTIDAD_NUMEROS);
     }
+    public int getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(int saldo) {
+        if (saldo >= 0) {
+            this.saldo = saldo;
+        }
+    }
 
     public static boolean esRojo(int n) {
         for (int numerosRojo : numerosRojos) {
@@ -56,22 +65,10 @@ public class Ruleta {
                 return !esParNum;
             }
         }
-
         return false;
     }
 
-    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
-        if (historialSize < MAX_HISTORIAL) {
-            historialNumeros[historialSize] = numero;
-            historialApuestas[historialSize] = apuesta;
-            historialAciertos[historialSize] = acierto;
-            historialSize++;
-        } else {
-            System.out.println("El historial está lleno. No se guardarán más resultados.");
-        }
-    }
-
-    public static int actualizarSaldo(int monto, boolean acierto) {
+    public int actualizarSaldo(int monto, boolean acierto) {
         if (acierto) {
             saldo += monto;
         } else {
