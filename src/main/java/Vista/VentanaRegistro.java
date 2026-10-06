@@ -1,5 +1,8 @@
+package Vista;
+
+import Modelo.Usuario;
+
 import javax.swing.*;
-import java.util.Scanner;
 
 public class VentanaRegistro {
 

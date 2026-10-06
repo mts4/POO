@@ -1,3 +1,7 @@
+package Vista;
+
+import Modelo.Usuario;
+
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
