@@ -12,4 +12,17 @@ public class RuletaController {
         this.ruleta = new Ruleta(1000);
         this.resultadoController = resultadoController;
     }
+    public int getSaldo() {
+        return ruleta.getSaldo();
+    }
+
+    public boolean depositar(int monto) {
+        return ruleta.depositar(monto);
+    }
+
+    public String obtenerColorTexto(int numero) {
+        return ruleta.obtenerColorTexto(numero);
+    }
+
+
 }
