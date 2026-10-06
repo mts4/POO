@@ -12,4 +12,14 @@ public class ResultadoController {
     public ResultadoController() {
         this.historial = new ArrayList<>();
     }
+
+    public void registrarResultado(int numero, int monto, boolean acierto, TipoApuesta tipo) {
+        if (historial.size() < MAX_HISTORIAL) {
+            historial.add(new Resultado(numero, monto, acierto, tipo));
+        }
+    }
+
+    public List<Resultado> getHistorial() {
+        return historial;
+    }
 }
