@@ -39,4 +39,34 @@ public class SessionController {
         }
         return false;
     }
+    public boolean hayUsuario() {
+        return usuarioActual != null;
+    }
+
+    public String getNombreUsuario() {
+        return hayUsuario() ? usuarioActual.getNombre() : "";
+    }
+
+    public boolean actualizarNombreUsuario(String nuevoNombre) {
+        if (hayUsuario()) {
+            return usuarioActual.setNombre(nuevoNombre);
+        }
+        return false;
+    }
+
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public RuletaController getRuletaController() {
+        return ruletaController;
+    }
+
+    public ResultadoController getResultadoController() {
+        return resultadoController;
+    }
+
+    public void cerrarSesion() {
+        usuarioActual = null;
+    }
 }
