@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Resultado;
 import Modelo.Ruleta;
 import Modelo.TipoApuesta;
+import java.util.List;
 
 public class ResultadoController {
 
@@ -14,6 +15,7 @@ public class ResultadoController {
 
 
     public String obtenerEstadisticas() {
+        List<Resultado> historial = session.getHistorial();
         if (historial.isEmpty()) {
             return "Aún no se han jugado rondas en esta sesión.";
         }
