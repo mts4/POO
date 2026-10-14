@@ -15,8 +15,8 @@ public class SessionController {
         this.usuarios.add(new Usuario("admin", "1234", "Dueño casino"));
         this.usuarios.add(new Usuario("jugador", "1111", "JugadorPrueba"));
 
-        this.resultadoController = new ResultadoController();
-        this.ruletaController = new RuletaController(this.resultadoController);
+        this.resultadoController = new ResultadoController(this);
+        this.ruletaController = new RuletaController(this);
     }
 
     public void registrarUsuario(String usuario, String clave, String nombre) {

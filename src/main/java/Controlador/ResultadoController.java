@@ -1,11 +1,16 @@
 package Controlador;
 
 import Modelo.Resultado;
+import Modelo.Ruleta;
 import Modelo.TipoApuesta;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResultadoController {
+
+    private final SessionController session;
+
+    public ResultadoController(SessionController session){
+        this.session = session;
+    }
 
 
     public String obtenerEstadisticas() {

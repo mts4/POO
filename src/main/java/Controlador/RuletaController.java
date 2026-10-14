@@ -6,11 +6,11 @@ import Modelo.TipoApuesta;
 
 public class RuletaController {
     private final Ruleta ruleta;
-    private final ResultadoController resultadoController;
+    private final SessionController session;
 
-    public RuletaController(ResultadoController resultadoController) {
+    public RuletaController(SessionController session) {
         this.ruleta = new Ruleta(1000);
-        this.resultadoController = resultadoController;
+        this.session = session;
     }
     public int getSaldo() {
         return ruleta.getSaldo();
@@ -33,7 +33,7 @@ public class RuletaController {
         boolean acierto = ruleta.evaluarApuesta(numeroSalido, tipo);
         ruleta.actualizarSaldo(monto, acierto);
 
-        resultadoController.registrarResultado(numeroSalido, monto, acierto, tipo);
+        session.registrarResultado(numeroSalido, monto, acierto, tipo);
 
         return new Resultado(numeroSalido, monto, acierto, tipo);
     }
