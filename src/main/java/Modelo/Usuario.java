@@ -1,9 +1,13 @@
 package Modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Usuario {
     private String username;
     private String password;
     private String nombre;
+    private List<Resultado> historial;
 
     public Usuario() {
         this("invitado", "", "Invitado");
@@ -17,7 +21,9 @@ public class Usuario {
         } else {
             this.nombre = "Invitado";
         }
+        this.historial = new ArrayList<>();
     }
+
     public boolean validarCredenciales (String u, String p) {
         return this.username.equals(u) && this.password.equals(p);
     }
@@ -51,5 +57,15 @@ public class Usuario {
             return true;
         }
         return false;
+    }
+
+    public List<Resultado> getHistorial() {
+        return historial;
+    }
+
+    public void agregarResultado(Resultado resultado) {
+        if (resultado != null) {
+            this.historial.add(resultado);
+        }
     }
 }
