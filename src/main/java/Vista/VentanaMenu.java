@@ -174,8 +174,8 @@ public class VentanaMenu {
     }
 
     private void opcionHistorial() {
-        String estadisticas = session.getResultadoController().obtenerEstadisticas();
-        JOptionPane.showMessageDialog(frame, estadisticas, "Historial de Jugadas", JOptionPane.INFORMATION_MESSAGE);
+        frame.dispose();
+        new VentanaHistorial(session).mostrarVentana();
     }
 
     private void opcionSalir() {
