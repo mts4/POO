@@ -33,7 +33,9 @@ public class RuletaController {
         boolean acierto = ruleta.evaluarApuesta(numeroSalido, tipo);
         ruleta.actualizarSaldo(monto, acierto);
 
-        session.registrarResultado(numeroSalido, monto, acierto, tipo);
+        Resultado resultado = new Resultado(numeroSalido, monto, acierto, tipo);
+
+        session.registrarResultado(resultado);
 
         return new Resultado(numeroSalido, monto, acierto, tipo);
     }

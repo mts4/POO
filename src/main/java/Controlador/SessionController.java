@@ -1,7 +1,6 @@
 package Controlador;
 
 import Modelo.Resultado;
-import Modelo.TipoApuesta;
 import Modelo.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +70,9 @@ public class SessionController {
     public void cerrarSesion() {
         usuarioActual = null;
     }
-    public void registrarResultado(int  numeroSalido, int monto, boolean acierto, TipoApuesta tipo) {
+    public void registrarResultado(Resultado resultado) {
         if (hayUsuario()) {
-            usuarioActual.agregarResultado(numeroSalido, monto, acierto, tipo);
+            usuarioActual.agregarResultado(resultado);
         }
     }
     public List<Resultado> getHistorial() {
