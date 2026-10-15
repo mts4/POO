@@ -24,7 +24,7 @@ public class VentanaHistorial {
     }
 
     public void mostrarVentana() {
-        String estadisticas = session.getResultadoController().obtenerEstadisticas();
+        String estadisticas = session.getResultadoController().obtenerHistorial();
         txtHistorial.setText(estadisticas);
 
         frame.setLocationRelativeTo(null);

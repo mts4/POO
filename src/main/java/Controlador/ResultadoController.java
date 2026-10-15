@@ -2,48 +2,48 @@ package Controlador;
 
 import Modelo.Resultado;
 import Modelo.Ruleta;
-import Modelo.TipoApuesta;
+
 import java.util.List;
 
 public class ResultadoController {
 
     private final SessionController session;
 
+    int ronda = 0;
+    int montoTotal = 0;
+
     public ResultadoController(SessionController session){
         this.session = session;
     }
 
 
-    public String obtenerEstadisticas() {
+    public String obtenerHistorial() {
         List<Resultado> historial = session.getHistorial();
         if (historial.isEmpty()) {
             return "Aún no se han jugado rondas en esta sesión.";
         }
 
-        int totalAciertos = 0;
-        int totalGanancia = 0;
-        int montoTotal = 0;
+        String texto = "=== HISTORIAL DE JUGADAS DE " + session.getNombreUsuario() + " ===\n\n";
 
         for (Resultado r : historial) {
-            int apuesta = r.getMonto();
-            montoTotal += apuesta;
+            ronda = ronda + 1;
+            texto = texto + "Jugada " + ronda + ":\n";
+            texto = texto + " - Número salido : " + r.getNumero() + "\n";
+            texto = texto + " - Tipo apuesta  : " + r.getTipo() + "\n";
+            texto = texto + " - Monto apostado: $" + r.getMonto() + "\n";
 
             if (r.isAcierto()) {
-                totalAciertos++;
-                totalGanancia += apuesta;
+                texto = texto + " - Resultado     : RONDA GANADA\n";
+                montoTotal += r.getMonto();
             } else {
-                totalGanancia -= apuesta;
+                texto = texto + " - Resultado     : RONDA PERDIDA\n";
+                montoTotal -= r.getMonto();
             }
+            texto = texto + "--------------------------------------\n";
+
         }
-
-        String balance = (totalGanancia >= 0)
-                ? "Ganancia neta              : +$" + totalGanancia
-                : "Pérdida neta               : -$" + Math.abs(totalGanancia);
-
-        return "=== ESTADÍSTICAS DE JUEGO ===\n\n" +
-                "Cantidad de rondas jugadas : " + historial.size() + "\n" +
-                "Monto total apostado       : $" + montoTotal + "\n" +
-                "Cantidad total de aciertos : " + totalAciertos + "\n" +
-                balance;
+        texto = texto + "SALDO ACTUAL: " + session.getRuletaController().getSaldo() + " | BALANCE: " + montoTotal + " | RONDAS JUGADAS: " + ronda +  "\n";
+        ronda = 0;
+        return  texto;
     }
 }
