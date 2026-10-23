@@ -24,8 +24,10 @@ public class VentanaHistorial {
     }
 
     public void mostrarVentana() {
-        String estadisticas = session.getResultadoController().obtenerHistorial();
-        txtHistorial.setText(estadisticas);
+        java.util.List<Modelo.Resultado> historial = session.getResultadoController().obtenerHistorial();
+
+        String texto = construirTextoHistorial(historial);
+        txtHistorial.setText(texto);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -62,5 +64,39 @@ public class VentanaHistorial {
     private void volverAlMenu() {
         frame.dispose();
         new VentanaMenu(session).mostrarVentana();
+    }
+    private String construirTextoHistorial(java.util.List<Modelo.Resultado> historial) {
+        if (historial.isEmpty()) {
+            return "Aún no se han jugado rondas en esta sesión.";
+        }
+
+        StringBuilder texto = new StringBuilder();
+        texto.append("=== HISTORIAL DE JUGADAS DE ").append(session.getNombreUsuario()).append(" ===\n\n");
+
+        int ronda = 0;
+        int montoTotal = 0;
+
+        for (Modelo.Resultado r : historial) {
+            ronda++;
+            texto.append("Jugada ").append(ronda).append(":\n");
+            texto.append(" - Número salido : ").append(r.getNumero()).append("\n");
+            texto.append(" - Tipo apuesta  : ").append(r.getTipo()).append("\n");
+            texto.append(" - Monto apostado: $").append(r.getMonto()).append("\n");
+
+            if (r.isAcierto()) {
+                texto.append(" - Resultado     : RONDA GANADA\n");
+                montoTotal += r.getMonto();
+            } else {
+                texto.append(" - Resultado     : RONDA PERDIDA\n");
+                montoTotal -= r.getMonto();
+            }
+            texto.append("--------------------------------------\n");
+        }
+
+        texto.append("SALDO ACTUAL: $").append(session.getRuletaController().getSaldo())
+                .append(" | BALANCE: $").append(montoTotal)
+                .append(" | RONDAS JUGADAS: ").append(ronda).append("\n");
+
+        return texto.toString();
     }
 }
