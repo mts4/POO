@@ -85,10 +85,10 @@ public class VentanaMenu {
                 "RULETA — Casino Black Cat\n\n" +
                         "Bienvenido/a " + nombreActual + " al menú principal\n\n" +
                         "A la izquierda tienes:\n" +
-                        "• Perfil / Recargar: modifica tu nombre o deposita saldo.\n" +
-                        "• Jugar: abre la ventana de juego.\n" +
-                        "• Historial: muestra las estadísticas de la sesión.\n" +
-                        "• Salir: cierra sesión y vuelve al login."
+                        "• Perfil / Recargar: Modifica tu nombre o deposita saldo.\n" +
+                        "• Jugar: Abre la ventana de juego.\n" +
+                        "• Historial: Muestra las estadísticas de la sesión.\n" +
+                        "• Salir: Cierra sesión y vuelve al login."
         );
 
         txtMensaje.setEditable(false);
