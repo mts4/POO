@@ -14,12 +14,14 @@ public class VentanaMenu {
     private final JButton btnJugar = new JButton("Jugar");
     private final JButton btnHistorial = new JButton("Historial");
     private final JButton btnSalir = new JButton("Salir");
+    private final JButton btnEstadisticas = new JButton("Estadísticas");
 
     private final JPanel panelMensaje = new JPanel();
     private final JPanel panelBotones = new JPanel();
 
     private final Dimension tamanoBoton = new Dimension(230, 50);
     private final JTextArea txtMensaje = new JTextArea();
+
 
     public VentanaMenu(SessionController session) {
         this.session = session;
@@ -49,7 +51,7 @@ public class VentanaMenu {
     }
 
     private void configurarBotones() {
-        for (JButton botonNombre : new JButton[]{btnPerfil, btnJugar, btnHistorial, btnSalir}) {
+        for (JButton botonNombre : new JButton[]{btnPerfil, btnJugar, btnHistorial, btnSalir, btnEstadisticas}) {
             asignarDimBotones(botonNombre);
             centrarBotones(botonNombre);
         }
@@ -108,6 +110,7 @@ public class VentanaMenu {
         agregarBotonConMargen(btnJugar);
         agregarBotonConMargen(btnHistorial);
         agregarBotonConMargen(btnSalir);
+        agregarBotonConMargen(btnEstadisticas);
     }
 
     private void agregarBotonConMargen(JButton boton) {
@@ -120,6 +123,10 @@ public class VentanaMenu {
         btnJugar.addActionListener(e -> opcionJugar());
         btnHistorial.addActionListener(e -> opcionHistorial());
         btnSalir.addActionListener(e -> opcionSalir());
+        btnEstadisticas.addActionListener(e -> {
+            VentanaEstadisticas ventanaStats = new VentanaEstadisticas(this.session);
+            ventanaStats.mostrarVentana();
+        });
     }
 
     private void opcionJugar() {
@@ -127,7 +134,6 @@ public class VentanaMenu {
         new VentanaRuleta(session).mostrarVentana();
     }
 
-    // Vista de perfil para consultar/modificar nombre y recargar saldo (Objetivo 6)
     private void opcionPerfil() {
         String[] opciones = {"Cambiar Nombre", "Depositar Saldo", "Cerrar"};
         String infoPerfil = "Nombre actual: " + session.getNombreUsuario() + "\n" +
