@@ -104,7 +104,7 @@ public class VentanaMenu {
         panelBotones.setLayout(new BoxLayout(panelBotones, BoxLayout.Y_AXIS));
         panelBotones.setBorder(BorderFactory.createLineBorder(Color.BLUE));
 
-        panelBotones.add(Box.createRigidArea(new Dimension(0, 50)));
+        panelBotones.add(Box.createRigidArea(new Dimension(0, 20)));
 
         agregarBotonConMargen(btnPerfil);
         agregarBotonConMargen(btnJugar);
@@ -123,10 +123,11 @@ public class VentanaMenu {
         btnJugar.addActionListener(e -> opcionJugar());
         btnHistorial.addActionListener(e -> opcionHistorial());
         btnSalir.addActionListener(e -> opcionSalir());
-        btnEstadisticas.addActionListener(e -> {
-            VentanaEstadisticas ventanaStats = new VentanaEstadisticas(this.session);
-            ventanaStats.mostrarVentana();
-        });
+        btnEstadisticas.addActionListener(e -> opcionEstadisticas());
+    }
+    private void opcionEstadisticas(){
+        VentanaEstadisticas ventanaStats = new VentanaEstadisticas(this.session);
+        ventanaStats.mostrarVentana();
     }
 
     private void opcionJugar() {

@@ -16,7 +16,8 @@ public class ResultadoController {
     }
 
 	public Estadisticas obtenerEstadisticas() {
-		// TODO - implement ResultadoController.obtenerEstadisticas
-		throw new UnsupportedOperationException();
+        List<Resultado> historialUsuario = this.obtenerHistorial();
+        return new Estadisticas(historialUsuario);
 	}
+
 }
