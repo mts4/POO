@@ -26,6 +26,7 @@ public class VentanaRuleta {
 
     private final SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 10, 10000, 10);
     private final JSpinner spinnerApuesta = new JSpinner(modeloMonto);
+	private JButton btnEstadisticas;
 
     public VentanaRuleta(SessionController session) {
         this.session = session;
