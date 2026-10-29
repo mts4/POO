@@ -39,7 +39,7 @@ public class Estadisticas {
 		return this.rachaMaxima;
 	}
 
-	public ApuestaBase getTipoMasJugado() {
+	public String getTipoMasJugado() {
 		return this.tipoMasJugado;
 	}
 
@@ -82,23 +82,27 @@ public class Estadisticas {
 
 	private String determinarTipoMasJugado() {
 		if (this.historial.isEmpty()) {
-			return null;
+			return "Sin datos";
 		}
 
-		Map<ApuestaBase, Integer> frecuencias = new HashMap<>();
-		for (Resultado r : this.historial) {
-			ApuestaBase tipo = r.getTipo();
-			frecuencias.put(tipo, frecuencias.getOrDefault(tipo, 0) + 1);
-		}
+		String masFrecuente = "Sin datos";
+		int maxFrecuencia = 0;
 
-		ApuestaBase masFrecuente = null;
-		int maxFrecuencia = -1;
+		for (int i = 0; i < this.historial.size(); i++) {
+			String apuestaActual = this.historial.get(i).getTipo().getTipoApuesta();
+			int contadorActual = 0;
 
-		for (Map.Entry<ApuestaBase, Integer> entry : frecuencias.entrySet()) {
-			if (entry.getValue() > maxFrecuencia) {
-				maxFrecuencia = entry.getValue();
-				masFrecuente = entry.getKey();
+			for (int j = 0; j < this.historial.size(); j++) {
+				String apuestaAComparar = this.historial.get(j).getTipo().getTipoApuesta();
+
+				if (apuestaActual.equals(apuestaAComparar)) {
+					contadorActual++;
+				}
 			}
+			if (contadorActual > maxFrecuencia) {
+				maxFrecuencia = contadorActual;
+				masFrecuente = apuestaActual;
+				}
 		}
 		return masFrecuente;
 	}
