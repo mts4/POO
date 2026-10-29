@@ -47,15 +47,13 @@ public class Ruleta {
         return esRojo(numero) ? "Rojo" : "Negro";
     }
 
-    public boolean evaluarApuesta(int numero, TipoApuesta tipo) {
-        if (numero == 0 || tipo == null) return false;
-
-        return switch (tipo) {
-            case ROJO -> esRojo(numero);
-            case NEGRO -> !esRojo(numero);
-            case PAR -> numero % 2 == 0;
-            case IMPAR -> numero % 2 != 0;
-        };
+    public boolean evaluarApuesta(int numero, ApuestaBase apuesta) {
+        if (apuesta == null) {
+            return false;
+        }
+        
+        String color = obtenerColorTexto(numero);
+        return apuesta.acierto(numero, color);
     }
     public int actualizarSaldo(int monto, boolean acierto) {
         if (acierto) {
