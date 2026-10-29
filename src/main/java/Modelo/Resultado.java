@@ -4,17 +4,13 @@ public class Resultado {
     private int numero;
     private int monto;
     private boolean acierto;
-    private TipoApuesta tipo;
+    private ApuestaBase apuesta;
 
-    public Resultado() {
-        this(0, 0, false, TipoApuesta.ROJO);
-    }
-
-    public Resultado(int numero, int monto, boolean acierto, TipoApuesta tipo) {
+    public Resultado(int numero, int monto, boolean acierto, ApuestaBase apuesta) {
         this.numero = numero;
         this.monto = monto;
         this.acierto = acierto;
-        this.tipo = tipo;
+        this.apuesta = apuesta;
     }
     public int getNumero() {
         return numero;
@@ -40,12 +36,12 @@ public class Resultado {
         this.acierto = acierto;
     }
 
-    public TipoApuesta getTipo() {
-        return tipo;
+    public ApuestaBase getTipo() {
+        return apuesta;
     }
 
-    public void setTipo(TipoApuesta tipo) {
-        this.tipo = tipo;
+    public void setTipo(ApuestaBase tipo) {
+        this.apuesta = tipo;
     }
 }
 
