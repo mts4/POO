@@ -51,7 +51,7 @@ public class Ruleta {
         if (apuesta == null) {
             return false;
         }
-        
+
         String color = obtenerColorTexto(numero);
         return apuesta.acierto(numero, color);
     }

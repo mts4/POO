@@ -3,7 +3,12 @@ package Vista;
 import Controlador.RuletaController;
 import Controlador.SessionController;
 import Modelo.Resultado;
-import Modelo.TipoApuesta;
+
+import Modelo.ApuestaBase;
+import Modelo.ApuestaRojo;
+import Modelo.ApuestaNegro;
+import Modelo.ApuestaPar;
+import Modelo.ApuestaImpar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,18 +20,22 @@ public class VentanaRuleta {
 
     private final JFrame frame = new JFrame("Ruleta - Casino Black Cat");
     private final JLabel lblTipo = new JLabel("Tipo de apuesta:");
+    private final JLabel lblColor = new JLabel("Seleccione color:");
+    private final JLabel lblParidad = new JLabel("Seleccione paridad:");
     private final JLabel lblMonto = new JLabel("Monto:");
     private final JLabel lblResultado = new JLabel("");
     private final JButton btnGirar = new JButton("Girar");
     private final JButton btnVolver = new JButton("Volver al Menú");
     private final JTextField txtSaldo = new JTextField();
 
-    // Uso de TipoApuesta en JComboBox según Listing 7 de la guía
-    private final JComboBox<TipoApuesta> cboTipo = new JComboBox<>(TipoApuesta.values());
+    private final JComboBox<ApuestaBase> cboTipo = new JComboBox<>(new ApuestaBase[]{
+            new ApuestaRojo(), new ApuestaNegro(), new ApuestaPar(), new ApuestaImpar()
+    });
+    private final JComboBox<String> comboColor = new JComboBox<>();
+    private final JComboBox<String> comboParidad = new JComboBox<>();
 
     private final SpinnerNumberModel modeloMonto = new SpinnerNumberModel(100, 10, 10000, 10);
     private final JSpinner spinnerApuesta = new JSpinner(modeloMonto);
-	private JButton btnEstadisticas;
 
     public VentanaRuleta(SessionController session) {
         this.session = session;
@@ -100,9 +109,8 @@ public class VentanaRuleta {
 
     private void ejecutarGiro() {
         int monto = (Integer) spinnerApuesta.getValue();
-        TipoApuesta tipo = (TipoApuesta) cboTipo.getSelectedItem();
+        ApuestaBase tipo = (ApuestaBase) cboTipo.getSelectedItem();
 
-        // La Vista delega la coordinación al Controlador (Listing 2)
         Resultado resultado = controlador.realizarApuesta(tipo, monto);
 
         if (resultado == null) {
@@ -125,7 +133,7 @@ public class VentanaRuleta {
 
         lblResultado.setText(String.format(
                 "Número %d (%s) | Apuesta=%s | Monto=$%d | %s | Saldo=$%d",
-                res.getNumero(), colorNumero, res.getTipo(), res.getMonto(), estado, controlador.getSaldo()
+                res.getNumero(), colorNumero, res.getTipo().getTipoApuesta(), res.getMonto(), estado, controlador.getSaldo()
         ));
     }
 

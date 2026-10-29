@@ -1,8 +1,8 @@
 package Controlador;
 
+import Modelo.ApuestaBase;
 import Modelo.Resultado;
 import Modelo.Ruleta;
-import Modelo.TipoApuesta;
 
 public class RuletaController {
     private final Ruleta ruleta;
@@ -24,19 +24,19 @@ public class RuletaController {
         return ruleta.obtenerColorTexto(numero);
     }
 
-    public Resultado realizarApuesta(TipoApuesta tipo, int monto) {
+    public Resultado realizarApuesta(ApuestaBase apuesta, int monto) {
         if (monto <= 0 || monto > ruleta.getSaldo()) {
             return null;
         }
 
         int numeroSalido = ruleta.numeroAleatorio();
-        boolean acierto = ruleta.evaluarApuesta(numeroSalido, tipo);
+        boolean acierto = ruleta.evaluarApuesta(numeroSalido, apuesta);
         ruleta.actualizarSaldo(monto, acierto);
 
-        Resultado resultado = new Resultado(numeroSalido, monto, acierto, tipo);
+        Resultado resultado = new Resultado(numeroSalido, monto, acierto, apuesta);
 
         session.registrarResultado(resultado);
 
-        return new Resultado(numeroSalido, monto, acierto, tipo);
+        return new Resultado(numeroSalido, monto, acierto, apuesta);
     }
 }

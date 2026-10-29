@@ -24,7 +24,7 @@ public class VentanaEstadisticas {
 		frame.setLocationRelativeTo(null);
 		frame.setLayout(new GridLayout(6, 1));
 
-		String tipoTexto = (stats.getTipoMasJugado() != null) ? stats.getTipoMasJugado().toString() : "Sin datos";
+		String tipoTexto = stats.getTipoMasJugado();
 
 		frame.add(new JLabel("  Total de Jugadas: " + stats.getTotalJugadas()));
 		frame.add(new JLabel("  Victorias Totales: " + stats.getVictorias()));

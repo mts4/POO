@@ -12,4 +12,9 @@ public abstract class ApuestaBase {
     }
 
     public abstract boolean acierto(int numero, String color);
+
+    @Override
+    public String toString() {
+        return this.tipoApuesta;
+    }
 }

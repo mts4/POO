@@ -11,7 +11,7 @@ public class Estadisticas {
 	private int victorias;
 	private double porcentajeVictorias;
 	private int rachaMaxima;
-	private TipoApuesta tipoMasJugado;
+	private String tipoMasJugado;
 	private List<Resultado> historial;
 
 	public Estadisticas(List<Resultado> historial) {
@@ -39,7 +39,7 @@ public class Estadisticas {
 		return this.rachaMaxima;
 	}
 
-	public TipoApuesta getTipoMasJugado() {
+	public ApuestaBase getTipoMasJugado() {
 		return this.tipoMasJugado;
 	}
 
@@ -74,27 +74,27 @@ public class Estadisticas {
 					maxima = rachaActual;
 				}
 			} else {
-				rachaActual = 0; // Se rompe la racha
+				rachaActual = 0;
 			}
 		}
 		return maxima;
 	}
 
-	private TipoApuesta determinarTipoMasJugado() {
+	private String determinarTipoMasJugado() {
 		if (this.historial.isEmpty()) {
 			return null;
 		}
 
-		Map<TipoApuesta, Integer> frecuencias = new HashMap<>();
+		Map<ApuestaBase, Integer> frecuencias = new HashMap<>();
 		for (Resultado r : this.historial) {
-			TipoApuesta tipo = r.getTipo();
+			ApuestaBase tipo = r.getTipo();
 			frecuencias.put(tipo, frecuencias.getOrDefault(tipo, 0) + 1);
 		}
 
-		TipoApuesta masFrecuente = null;
+		ApuestaBase masFrecuente = null;
 		int maxFrecuencia = -1;
 
-		for (Map.Entry<TipoApuesta, Integer> entry : frecuencias.entrySet()) {
+		for (Map.Entry<ApuestaBase, Integer> entry : frecuencias.entrySet()) {
 			if (entry.getValue() > maxFrecuencia) {
 				maxFrecuencia = entry.getValue();
 				masFrecuente = entry.getKey();

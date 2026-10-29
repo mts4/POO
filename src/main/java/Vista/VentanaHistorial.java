@@ -80,7 +80,7 @@ public class VentanaHistorial {
             ronda++;
             texto.append("Jugada ").append(ronda).append(":\n");
             texto.append(" - Número salido : ").append(r.getNumero()).append("\n");
-            texto.append(" - Tipo apuesta  : ").append(r.getTipo()).append("\n");
+            texto.append(" - Tipo apuesta  : ").append(r.getTipo().getTipoApuesta()).append("\n");
             texto.append(" - Monto apostado: $").append(r.getMonto()).append("\n");
 
             if (r.isAcierto()) {
